@@ -69,7 +69,7 @@ Vue2.0和1.0相比，最大的变化就是引入 Virtual DOM(虚拟DOM)，页面
 
 运行时，打开Chrome控制台，会显示如下图所示，按照图中指示，即可隐藏掉。
 
-![1552717843933](image/1.png)
+![1552717843933](../image/1.png)
 
 #### 安装vue-devtools插件，便于在Chrome中调试
 
@@ -81,7 +81,7 @@ Vue2.0和1.0相比，最大的变化就是引入 Virtual DOM(虚拟DOM)，页面
 
 ### vue中常用指令
 - `v-model`，双向数据绑定，一般用于表单元素。[v-model](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/02.html)
-![1552717843934](image/2.png)
+![1552717843934](../image/2.png)
 
 - `v-for`，对数组或对象进行循环操作，使用的是v-for。[v-for](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/03.html)
     - 注：在vue1.0中提供了隐式变量，如$index，$key；在vue2.0中去除了隐式变量，已被废除
