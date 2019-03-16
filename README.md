@@ -131,8 +131,8 @@ Vue2.0和1.0相比，最大的变化就是引入 Virtual DOM(虚拟DOM)，页面
 ### 属性
 #### 属性绑定和属性的简写
 - `v-bind`：用于属性绑定，`v-bind:属性=""`
-- 属性绑定简写：[属性绑定10]()
+- 属性绑定简写：[属性绑定](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/10.html)
     - `v-bind:src`简写为`:src`
     
 - class和style属性
-    - 绑定class和style属性时语法比较复杂：[绑定class和style11]()
+    - 绑定class和style属性时语法比较复杂：[绑定class和style](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/11.html)
