@@ -86,8 +86,8 @@ Vue2.0和1.0相比，最大的变化就是引入 Virtual DOM(虚拟DOM)，页面
 - `v-for`，对数组或对象进行循环操作，使用的是v-for。[v-for](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/03.html)
     - 注：在vue1.0中提供了隐式变量，如$index，$key；在vue2.0中去除了隐式变量，已被废除
 
-- `v-on`，用来绑定事件，用法：v-on:事件="函数"。[v-on]()
+- `v-on`，用来绑定事件，用法：v-on:事件="函数"。[v-on](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/04.html)
 
-- `v-show / v-if`，用来显示或隐藏元素。[v-show / v-if]()
+- `v-show / v-if`，用来显示或隐藏元素。[v-show / v-if](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/05.html)
     - `v-show`是通过display来实现的，使用v-show通过在浏览器f12查看，只是在该div上加了display属性
     - `v-if`是每次删除后再重新创建，v-if在浏览器f12上是该div直接被删除了，应该是直接被注释掉了，也不占空间
