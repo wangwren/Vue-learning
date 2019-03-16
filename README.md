@@ -97,7 +97,7 @@ Vue2.0和1.0相比，最大的变化就是引入 Virtual DOM(虚拟DOM)，页面
 - 事件简写
     - `v-on:click=""`简写方式 `@click=""`
     - 凡是点击事件，都可以将`v-on:` 换成 `@`来表示
-    - [事件简写和事件对象07]()
+    - [事件简写和事件对象](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/07.html)
     
 - 事件对象`$event`
     - 包含事件相关信息，如事件源、事件类型、偏移量
@@ -114,9 +114,9 @@ Vue2.0和1.0相比，最大的变化就是引入 Virtual DOM(虚拟DOM)，页面
         - 原生js方式，依赖于事件对象
         - vue方式，不依赖事件对象，使用比如`@click.prevent`
         
-- [事件冒泡和默认行为08]()
+- [事件冒泡和默认行为](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/08.html)
 
-- [键盘事件09]()
+- [键盘事件](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/09.html)
     - 回车：`@keydown.13`或者 `@keydown.enter`
     - 上：`@keydown.38` 或者 `@keydown.up`
     - 默认没有`@keydown.a/b/c...`事件，可以自定义键盘事件，也称为自定义键位别名
