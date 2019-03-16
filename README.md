@@ -91,3 +91,39 @@ Vue2.0和1.0相比，最大的变化就是引入 Virtual DOM(虚拟DOM)，页面
 - `v-show / v-if`，用来显示或隐藏元素。[v-show / v-if](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/05.html)
     - `v-show`是通过display来实现的，使用v-show通过在浏览器f12查看，只是在该div上加了display属性
     - `v-if`是每次删除后再重新创建，v-if在浏览器f12上是该div直接被删除了，应该是直接被注释掉了，也不占空间
+
+## 事件和属性
+### 事件
+- 事件简写
+    - `v-on:click=""`简写方式 `@click=""`
+    - 凡是点击事件，都可以将`v-on:` 换成 `@`来表示
+    - [事件简写和事件对象07]()
+    
+- 事件对象`$event`
+    - 包含事件相关信息，如事件源、事件类型、偏移量
+    - target、type、offsetx
+
+- 事件冒泡
+    - 即在div中有一个点击事件，在其中又嵌入一个按钮点击事件，点击按钮时也会触发div的事件，而我们只想显示按钮点击事件。
+    - 阻止事件冒泡
+        - 原生js方式，依赖于事件对象$event
+        - vue方式，不依赖以事件对象，直接在事件上使用比如`@click.stop`
+        
+- 事件默认行为
+    - 阻止默认行为
+        - 原生js方式，依赖于事件对象
+        - vue方式，不依赖事件对象，使用比如`@click.prevent`
+        
+- [事件冒泡和默认行为08]()
+
+- [键盘事件09]()
+    - 回车：`@keydown.13`或者 `@keydown.enter`
+    - 上：`@keydown.38` 或者 `@keydown.up`
+    - 默认没有`@keydown.a/b/c...`事件，可以自定义键盘事件，也称为自定义键位别名
+
+- 事件修饰符(可以查官网，v-on中)
+    - `.stop`：调用`event.stopPropagation`阻止事件冒泡
+    - `.prevent`：调用`event.preventDefault()`阻止默认行为
+    - `.{keyCode | keyAlias}`：只当事件是从特定键触发时才触发回调
+    - `.native`：监听组件根元素的原生事件
+    - `.once`：只触发一次
