@@ -80,8 +80,8 @@ Vue2.0和1.0相比，最大的变化就是引入 Virtual DOM(虚拟DOM)，页面
 用来扩展HTML标签的功能
 
 ### vue中常用指令
-- `v-mode`，双向数据绑定，一般用于表单元素。[v-model]()
+- `v-mode`，双向数据绑定，一般用于表单元素。[v-model](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/02.html)
 ![1552717843934](image/2.png)
 
-- `v-for`，对数组或对象进行循环操作，使用的是v-for。[v-for]()
+- `v-for`，对数组或对象进行循环操作，使用的是v-for。[v-for](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/03.html)
     - 注：在vue1.0中提供了隐式变量，如$index，$key；在vue2.0中去除了隐式变量，已被废除
