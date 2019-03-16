@@ -127,3 +127,12 @@ Vue2.0和1.0相比，最大的变化就是引入 Virtual DOM(虚拟DOM)，页面
     - `.{keyCode | keyAlias}`：只当事件是从特定键触发时才触发回调
     - `.native`：监听组件根元素的原生事件
     - `.once`：只触发一次
+    
+### 属性
+#### 属性绑定和属性的简写
+- `v-bind`：用于属性绑定，`v-bind:属性=""`
+- 属性绑定简写：[属性绑定10]()
+    - `v-bind:src`简写为`:src`
+    
+- class和style属性
+    - 绑定class和style属性时语法比较复杂：[绑定class和style11]()
