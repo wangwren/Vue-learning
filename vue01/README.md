@@ -136,3 +136,39 @@ Vue2.0和1.0相比，最大的变化就是引入 Virtual DOM(虚拟DOM)，页面
     
 - class和style属性
     - 绑定class和style属性时语法比较复杂：[绑定class和style](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/11.html)
+
+## 模板
+### 简介
+Vue.js使用基于HTML的模板语法，可以将DOM绑定到Vue实例中的数据。  
+模板就是{{}}，两对大括号，用来进行数据绑定，显示在页面中。也称为Mustache语法。
+
+### 数据绑定的方式
+- 双向绑定
+    - v-model
+- 单向绑定
+    - 方式1：使用两对大括号{{}}，可能会出现闪烁的问题，即刚一打开会看到两对大括号，可以使用v-cloak解决，但是需要结合CSS
+    - 方式2：使用v-text、v-html
+    
+### 其他指令
+- v-once，数据只绑定一次
+- v-pre，不编译，直接原样显示，即写什么显示什么，写两对大括号就显示两对大括号
+
+[模板](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/12.html)
+
+## 过滤器
+### 简介
+- 用来过滤模型数据，在显示之前进行数据处理和筛选。
+- 语法：`{{ data | filter1(参数) | filter2(参数) }}`
+
+### 关于内置过滤器
+在Vue1.0是还有内置过滤器，但在Vue2.0时已经删除了所有内置过滤器，全部被废除
+- 如何解决
+    - 使用第三方工具库，如lodash、date-fns日期格式化、accounting.js货币格式化等
+    - 使用自定义过滤器
+
+### 自定义过滤器
+使用全局方法`Vue.filter(过滤器ID,过滤器函数)`
+
+### 自定义局部过滤器
+
+代码：[过滤器](https://github.com/wangwren/Vue-learning/blob/master/vue01/node_modules/13.html)
