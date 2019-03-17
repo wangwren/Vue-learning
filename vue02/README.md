@@ -24,7 +24,7 @@
         - 如果使用模块化开发，可以使用qs模块进行转换。
 - axios本身**并不支持发送跨域**的请求，没有提供相应的API，作者也暂没有计划在axios添加支持发送跨域请求，所以只能使用第三方库
 
-- [发送AJAX]()
+- [发送AJAX](https://github.com/wangwren/Vue-learning/blob/master/vue02/01.html)
 
 ### 使用vue-resource发送跨域请求
 本身vue1.0推荐使用vue-resource，但是在vue2.0中也可以使用
@@ -46,4 +46,4 @@ this.$http.put(url, [body], [options])
 this.$http.patch(url, [body], [options])
 ```
 
-[360搜索练习]()
+[360搜索练习](https://github.com/wangwren/Vue-learning/blob/master/vue02/02.html)
