@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发送AJAX请求</title>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/vue-resource.min.js"></script>
+    <script>
+        window.onload = function (ev) {
+            new Vue({
+                el : '#itany',
+                data : {
+                    user : {},
+                    uid : ''
+                },
+                methods : {
+                    send(){
+                        axios({
+                            //使用axios发送ajax请求
+                            method : 'get', //指定请求类型
+                            url : 'user.json',    //请求的url
+                            data : {
+                                //也可以指定传过去的参数
+                            }
+                        }).then(function (res) {
+                            //axios请求后会返回一个Promise对象，调用该对象的then方法
+                            //相当于请求成功后的操作
+                            console.log(res.data.name);
+                        }).catch(function (res) {
+                            //请求失败后的操作
+                            console.log('请求失败:' + res.status)
+                        });
+                    },
+                    sendGet(){
+                        //axios.get('server.php?name=tom&age=23')
+                        //另一种携带参数的方式
+                        axios.get('server.php',{
+                            params : {
+                                name : 'alice',
+                                age : 19
+                            }
+                        }).then(function (res) {
+                            console.log(res.data);
+                        }).catch(function (err) {
+                            console.log('请求失败：'+err.status+','+err.statusText);
+                        });
+                    },
+                    sendPost(){
+                        /*axios.post('server.php',{
+                            name : 'alice',
+                            age : 19
+                        })这种方式并不能在后台获取到数据*/
+                        //axios.post('server.php','name=alice&age=20') //方式一，自己拼接键值对
+                        axios.post('server.php',this.user,{
+                            //加入可选项，可对参数进行操作后返回，这样就能在后台拿到数据
+                            transformRequest:[function (data) {
+                                let params = '';
+                                for(let index in data){
+                                    params+=index+'='+data[index]+'&';
+                                }
+                                return params;
+                            }]
+                        }).then(function (res) {
+                            console.log(res.data);
+                        });
+                    },
+                    getUserById(uid){
+                        axios.get(`https://api.github.com/users/${uid}`).then(function (res) {
+                            alert(uid);
+                            //ajax异步请求GitHub提供的api，将数据赋值给vue实例中定义的user
+                            this.user = res.data;
+                        });
+                    },
+                    sendJSONP(){
+                        //https://sug.so.360.cn/suggest?callback=suggest_so&encodein=utf-8&encodeout=utf-8&format=json&fields=word&word=a
+                        //https://sug.so.360.cn/suggest?callback=suggest_so&encodein=utf-8&encodeout=utf-8&format=json&fields=word&word=a
+                        this.$http.jsonp('https://sug.so.360.cn/suggest',{
+                            params : {
+                                //传递参数
+                                word : 'a'
+                            }
+                        }).then(function (res) {
+                            console.log(res.data.s);
+                        });
+                    },
+                    sendJSONP2(){
+                        //https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=a&json=1&p=3&sid=1420_21118_17001_21931_23632_22072&req=2&csor=1&cb=jQuery110208075694879886905_1498805938134&_=1498805938138
+                        this.$http.get('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
+                            params : {
+                                wd : 'a'
+                            },
+                            jsonp : 'cb' //百度使用的jsonp参数名为cb，所以需要修改。默认的是callback
+                        }).then(function (res) {
+                            console.log(res.data.s);
+                        });
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <div id="itany">
+        <button @click="send">发送AJAX请求</button>
+        <br/>
+        <br/>
+        <!--GET方式-->
+        <button @click="sendGet">GET方式发送AJAX请求</button>
+        <br/>
+        <br/>
+        <!--POST方式-->
+        <button @click="sendPost">Post方式发送AJAX请求</button>
+        <hr/>
+        <br/>
+        <!--uid双向绑定-->
+        GitHub ID: <input type="text" v-model="uid">
+        <button @click="getUserById(uid)">获取指定GitHub账号信息并显示</button>
+        <br/>
+        姓名：{{user.name}}<br/>
+        头像:<img :src="user.avatar_url">
+
+        <hr/>
+        <br/>
+        <button @click="sendJSONP">向360搜索发送JSONP请求</button>
+        <button @click="sendJSONP2">向百度搜索发送JSONP请求</button>
+    </div>
+</body>
+</html>

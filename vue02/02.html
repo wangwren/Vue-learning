@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>发送AJAX请求</title>
+	<style>
+		.current{
+			background-color:#ccc;
+		}
+	</style>
+	<script src="js/vue.js"></script>
+	<script src="js/vue-resource.min.js"></script>
+	<script>
+		window.onload=function(){
+			new Vue({
+				el:'#itany',
+				data:{
+					keyword:'',
+					myData:[],
+					now:-1 //当前选中项的索引
+				},
+				methods:{
+					getData(e){
+						//如果按方向键上、下，则不发请求
+						if(e.keyCode==38||e.keyCode==40)
+							return;
+
+						this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
+							params:{
+								wd:this.keyword
+							},
+							jsonp:'cb'
+						}).then(resp => {
+						    //将返回的数据赋给实例中定义的变量
+							this.myData=resp.data.s;
+						});
+					},
+					changeDown(){
+						this.now++;
+						this.keyword=this.myData[this.now];
+						if(this.now==this.myData.length){
+							this.now=-1;
+						}
+					},
+					changeUp(){
+						this.now--;
+						this.keyword=this.myData[this.now];
+						if(this.now==-2){
+							this.now=this.myData.length-1;
+						}
+					}
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="itany">
+		<!--需要传入事件对象，防止按上下键时也去发送jsonp请求，使用stop事件冒泡不好使-->
+		<input type="text" v-model="keyword" @keyup="getData($event)" @keydown.down="changeDown" @keydown.up.prevent="changeUp">
+		<ul>
+			<!--循环显示数据-->
+			<li v-for="(value,index) in myData" :class="{current:index==now}">
+				{{value}}
+			</li>
+		</ul>
+		<p v-show="myData.length==0">暂无数据....</p>
+	</div>
+</body>
+</html>
