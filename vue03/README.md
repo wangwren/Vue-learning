@@ -21,4 +21,6 @@
 - 计算属性由两部分组成：getter和setter，分别用来**获取计算属性**和**设置计算属性**。
 - 默认只有getter，如果需要setter，需要自己添加。
 - 这部分挺重要，看代码吧。
-**[计算属性](https://github.com/wangwren/Vue-learning/blob/master/vue03/04.html)**
+
+
+[**计算属性**](https://github.com/wangwren/Vue-learning/blob/master/vue03/04.html)
