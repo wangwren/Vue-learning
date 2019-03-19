@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算属性</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="itany">
+		<!-- 
+			1.基本用法
+		 -->
+		 <h2>{{msg}}</h2>
+		 <h2>{{msg2}}</h2>
+
+		 <!-- 对数据处理再显示 -->
+		 <h2>{{msg.split(' ').reverse().join(' ')}}</h2>
+		 <h2>{{reverseMsg}}</h2>
+		 <button @click="change">修改值</button>
+
+		<!-- 
+			2.计算属性 vs 方法
+		 -->
+		<!--  <h2>{{num1}}</h2>
+		<h2>{{num2}}</h2>
+		<h2>{{getNum2()}}</h2> vue实例中的方法，也可以这样调用 -->
+
+		 <button onclick="fn()">测试</button>
+		
+		<!-- 
+			3.get和set
+		 -->
+		 <h2>{{num2}}</h2>
+		 <button @click="change2">修改计算属性</button>
+
+
+	</div>
+
+
+	<script>
+		var vm=new Vue({
+			el:'#itany',
+			data:{ //普通属性
+				msg:'welcome to itany',
+				num1:8
+			},
+			computed:{ //计算属性
+				msg2:function(){ //该函数必须有返回值，用来获取属性，称为get函数
+					//这样的计算属性，没有依赖任何属性，所以将其定义为计算属性是无意义的
+					return '欢迎来到计科一班';
+				},
+				reverseMsg:function(){
+				    //计算属性默认只包含getter操作，如果想要setter操作，如下
+					//可以包含逻辑处理操作，同时reverseMsg依赖于msg
+					return this.msg.split(' ').reverse().join(' ');
+				},
+				num2:{
+					get:function(){
+					    //定义getter
+						console.log('num2：'+new Date());
+						return this.num1-1;
+					},
+					set:function(val){
+					    //定义setter
+						// console.log('修改num2值');
+						// this.num2=val; 这样是改变不了num2的，使用this.num2=val 其实还是调用了num2的setter，最终栈溢出
+						this.num1=111;	//所以，想改变计算属性的值，只能改变其依赖的属性，不要改计算属性本身
+					}
+				}
+			},
+			methods:{
+				change(){
+					// this.msg='i love you';
+					this.num1=666;
+				},
+				getNum2(){
+					console.log(new Date());
+					return this.num1-1;
+				},
+				change2(){
+					this.num2=111; //调用的是num2计算属性的setter方法，111会被当做参数，并不能直接改变计算属性num2值
+				}
+			}
+			
+		});
+
+		function fn(){
+			setInterval(function(){
+				// console.log(vm.num2); //测试计算属性与方法的不同，调用计算属性
+				console.log(vm.getNum2()); //调用方法
+			},1000);
+		}
+	</script>
+	
+
+</body>
+</html>
