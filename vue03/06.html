@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>添加和删除属性：$set、$delete</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="itany">
+		<button @click="doUpdate">修改属性</button>
+		<button @click="doAdd">添加属性</button>
+		<button @click="doDelete">删除属性</button>
+
+		<hr>	
+		<h2>{{user.name}}</h2>
+		<h2>{{user.age}}</h2>
+	</div>
+
+	<script>
+		var vm=new Vue({
+			el:'#itany',
+			data:{
+				user:{
+					id:1001,
+					name:'tom'
+				}
+			},
+			methods:{
+				doUpdate(){
+					this.user.name='汤姆'	//可以修改属性
+				},
+				doAdd(){
+					// this.user.age=25; //通过普通方式为对象添加属性时vue无法实时监视到
+					// this.$set(this.user,'age',18); //通过vue实例的$set方法为对象添加属性，可以实时监视
+					// Vue.set(this.user,'age',22);
+					if(this.user.age){
+					    //如果有这个属性，就在原先的基础上+1
+						this.user.age++;
+					}else{
+					    //如果没有这个属性，就加一个属性，并设置初始值为1
+						Vue.set(this.user,'age',1);
+					}
+
+					// console.log(this.user);
+				},
+				doDelete(){
+					if(this.user.age){
+					    //如果有这个属性
+						// delete this.user.age; //无效
+						Vue.delete(this.user,'age');	//删除user对象中的age属性
+					}
+				}
+			}
+		});
+
+	</script>
+	
+</body>
+</html>
