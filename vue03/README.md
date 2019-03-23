@@ -112,4 +112,4 @@ Vue在插入、更新或者移出DOM时，提供多种不同方式的应用过�
 `<transition>`只能使单元素实现动画，如果有多个元素，就要使用`<transition-group>`标签。  
 [多元素动画](https://github.com/wangwren/Vue-learning/blob/master/vue03/12.html)
 ### 练习
-[多元素动画练习13](https://github.com/wangwren/Vue-learning/blob/master/vue03/13.html)
+[多元素动画练习](https://github.com/wangwren/Vue-learning/blob/master/vue03/13.html)
