@@ -48,3 +48,68 @@
 - vm.$watch(data,callback[,options])  监视数据的变化，可以监视属性和对象，callback为回调函数，监视的data改变后会触发，可选项为true，表示深度监视，可监视对象中的属性被改变后触发回调函数
 
 [监视数据的变化](https://github.com/wangwren/Vue-learning/blob/master/vue03/07.html)
+
+## 自定义指令
+分类：全局指令、局部指令
+
+### 自定义全局指令
+使用全局方法`Vue.directive(指令ID,定义对象)`定义对象中提供了五个钩子函数。
+
+### 自定义局部指令
+[自定义指令](https://github.com/wangwren/Vue-learning/blob/master/vue03/08.html)
+
+### 练习
+[使用鼠标拖动页面中的元素](https://github.com/wangwren/Vue-learning/blob/master/vue03/09.html)
+
+## 过渡(动画)
+### 简介
+Vue在插入、更新或者移出DOM时，提供多种不同方式的应用过渡效果。  
+本质上还是使用CSS3动画：transition、、animation
+
+### 基本用法
+- 使用transition组件，将要执行动画的元素包含在该组件内  
+[过渡](https://github.com/wangwren/Vue-learning/blob/master/vue03/10.html)
+```html
+<!--要给transition起个name-->
+<transition name="">
+    运动的元素
+</transition>
+```
+
+- 过渡的CSS类名：6个
+![1552717843999](../image/4.png)
+
+### 钩子函数
+- 8个
+```html
+<transition
+  v-on:before-enter="beforeEnter"
+  v-on:enter="enter"
+  v-on:after-enter="afterEnter"
+  v-on:enter-cancelled="enterCancelled"
+
+  v-on:before-leave="beforeLeave"
+  v-on:leave="leave"
+  v-on:after-leave="afterLeave"
+  v-on:leave-cancelled="leaveCancelled"
+>
+  <!-- ... -->
+</transition>
+```
+
+### 结合第三方动画库animate.css一起使用
+- 结合animate.css一起使用时，可以使用自定义过渡的类名来引用样式
+![1552717843009](../image/5.png)
+```html
+<!--animated必须要写，是基础样式-->
+<transition enter-active-class="animated fadeInLeft" leave-active-class="animated fadeOutRight">
+    <p v-show="flag">计科一班</p>
+</transition> 
+```
+[使用animate.css](https://github.com/wangwren/Vue-learning/blob/master/vue03/11.html)
+
+### 多元素动画
+`<transition>`只能使单元素实现动画，如果有多个元素，就要使用`<transition-group>`标签。  
+[多元素动画](https://github.com/wangwren/Vue-learning/blob/master/vue03/12.html)
+### 练习
+[多元素动画练习13](https://github.com/wangwren/Vue-learning/blob/master/vue03/13.html)
