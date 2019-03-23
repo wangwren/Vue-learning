@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>引用模板</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="itany">
+        <!--使用自定义组件-->
+        <my-hello></my-hello>
+        <my-hello></my-hello>   <!--这就是两个组件了-->
+    </div>
+
+    <!--Vue提供的标签，可以在这里写模板，并且这里有且只有一个根元素，否则报错-->
+    <!--这里只是定义模板，并没有开始使用-->
+    <template id="wbs">
+        <div>
+            <h3>{{msg}}</h3>
+            <ul>
+                <li v-for="value in arr">{{value}}</li>
+            </ul>
+        </div>
+    </template>
+
+    <script>
+        var vm = new Vue({
+            el : '#itany',
+            components : {
+                //my-hello为标签名，使用的时候用这个
+                //这里只是创建组件
+                'my-hello' : {
+                    name : 'wbs111', //指定组件的名称，默认为标签名，可以不写
+                    template : '#wbs', //引用模板
+                    data : function () {
+                        return {
+                            msg : '计科一班',
+                            arr : ['tom','jack','mike']
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

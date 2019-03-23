@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件及组件间数据传递</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="itany">
+        <my-hello></my-hello>
+        <!--不能在这使用子组件-->
+    </div>
+
+    <template id="hello">
+        <div>
+            <h3>我是hello父组件</h3>
+            <h3>访问自己的数据：{{msg}},{{name}},{{age}},{{user.username}}</h3>
+            <!--想要访问子组件数据，需要子组件写事件，父组件通过方法接收，
+                并且在父组件定义的数据中需要有对应的属性-->
+            <h3>访问子组件数据：{{sex}},{{height}}</h3>
+            <hr/>
+
+            <!--使用子组件，只能在父组件中使用-->
+            <!--:message自定义的属性绑定，在子组件定义中使用props来接收
+                通过子组件自己定义的事件名称(e-world)，传递给父组件数据，父组件通过自己定义的getData方法来获取
+            -->
+            <my-world :message="msg" :name="name" :age="age" :user="user" @e-world="getData"></my-world>
+        </div>
+    </template>
+
+    <template id="world">
+        <div>
+            <h4>我是world子组件</h4>
+            <h4>访问父组件中的数据：{{message}},{{name}},{{age}},{{user.username}}</h4>
+            <h4>访问自己的数据：{{sex}},{{height}}</h4>
+            <button @click="send">将子组件的数据向上传递给父组件</button>
+        </div>
+    </template>
+
+    <script>
+        var vm = new Vue({//根组件
+            el : '#itany',
+            components : {
+                'my-hello' : {
+                    template : '#hello',
+                    data : function () {
+                        return {
+                            msg : '计科一班',
+                            name : 'tom',
+                            age : 23,
+                            user : {id:0129,username:'啦啦啦'},
+                            sex : '',
+                            height : ''
+                        }
+                    },
+                    methods : {
+                        getData : function (sex,heigth) {
+                          //子组件传递来的数据
+                          this.sex = sex;
+                          this.height = heigth;
+                        }
+                    },
+                    //在my-hello组件中定义子组件
+                    components: {
+                        'my-world' : {//子组件
+                            template: '#world',
+                            data : function () {
+                                return {
+                                    //在子组件中定义数据
+                                    sex : 'male',
+                                    height : 180.5
+                                }
+                            },
+                            //接收父组件传来的数据，在引用子组件时绑定的
+                            // props : ['message','name','age','user'] //简单的字符串数组
+                            props : { //也可以是对象，允许配置高级设置，如类型判断、数据校验、设置默认值
+                                message : String,   //这样写就是message必须是String类型
+                                name : { //复杂点，配置多点
+                                    type : String, //name必须是String类型
+                                    required : true //不能为空，必须有值
+                                },
+                                age : {
+                                    type : Number,
+                                    default : 18, //设置默认值
+                                    validate : function (value) {
+                                        //自定义校验，如果不符合控制台会报错
+                                        return value >= 0;
+                                    }
+                                },
+                                user : {
+                                    type : Object,
+                                    default : function () {
+                                        //对象或数组的默认值必须使用函数的形式来返回
+                                        return {
+                                            id : 3306,
+                                            username : '呵呵呵'
+                                        }
+                                    }
+                                }
+                            },
+                            methods : {
+                                send : function () {
+                                    //console.log(this); //此处的this表示当前子组件实例
+                                    //使用$emit(事件名称随便起,数据1,数据2...) 触发一个事件，发送数据
+                                    this.$emit('e-world',this.sex,this.height);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
