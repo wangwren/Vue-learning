@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由基本用法</title>
+    <style>
+        .active{
+            font-size:20px;
+            color:#ff7300;
+            text-decoration:none;
+        }
+    </style>
+    <link rel="stylesheet" href="css/animate.css">
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+</head>
+<body>
+    <div id="itany">
+        <div>
+            <!--使用router-link组件来定义导航，to属性指定链接url-->
+            <router-link to="/home">主页</router-link>
+            <router-link to="/user">用户</router-link>
+        </div>
+
+        <div>
+            <!--添加动画效果-->
+            <transition enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight">
+                <!--router-view 用来显示路由内容-->
+                <router-view></router-view>
+            </transition>
+        </div>
+
+        <hr/>
+
+        <button @click="push">添加路由</button>
+        <button @click="replace">替换路由</button>
+
+    </div>
+
+    <!--用户组件模板-->
+    <template id="user">
+        <div>
+            <h3>用户信息</h3>
+            <ul>
+                <!--嵌套子路由-->
+                <!--tag属性可以指定对应标签的样式，这里就会以li无序列表显示-->
+                <router-link to="/user/login?name=tom&pwd=123" tag="li">用户登录</router-link>
+                <router-link to="/user/regist/alice/456" tag="li">用户注册</router-link>
+            </ul>
+            <router-view></router-view>
+        </div>
+    </template>
+
+
+    <script>
+
+        //1.定义组件
+        var Home = {
+            template : '<h3>我是主页</h3>'
+        }
+
+        var User = {
+            template : '#user'
+        }
+
+        var Login = {
+            /*对于正常参数的获取，使用$route.query*/
+            template : '<h4>用户登录...获取参数：{{$route.query}}</h4>'
+        }
+
+        var Regist = {
+            /*对于rest风格的参数获取获取，使用$route.params*/
+            template : '<h4>用户注册...获取参数：{{$route.params}}</h4>'
+        }
+
+        //2.配置路由
+        const routes = [
+            //指定路径和组件模板
+            {
+                path:'/home',
+                component:Home
+            },
+            {
+                path:'/user',
+                component:User,
+                //嵌套子路由
+                children: [
+                    {
+                        //也带参数了，常规操作
+                        path:'login',
+                        component:Login
+                    },
+                    {
+                        //带参数rest风格
+                        path:'regist/:username/:password',
+                        component:Regist
+                    }
+                ]
+            },
+            {
+                path:'*',
+                redirect:'/home' //重定向
+            }
+        ]
+
+        //3.创建路由实例
+        const router = new VueRouter({
+            routes, //简写，相当于routes:routes。这是起名正好重了，可以简写
+            //mode : 'history' //更改模式，默认为hash
+            linkActiveClass : 'active' //更改活动链接的class类名
+        });
+
+        //根据根实例并将路由挂载到Vue实例上
+        var vm = new Vue({
+            el : '#itany',
+            router, //注入录入，简写，相当于router : router
+            methods : {
+                push : function () {
+                    router.push({path:'home'}); //添加路由，切换路由
+                },
+                replace : function () {
+                    router.replace({path:'user'}); //替换路由，没有历史记录
+                }
+            }
+        });
+    </script>
+</body>
+</html>
