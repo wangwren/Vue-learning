@@ -61,3 +61,20 @@
         - **(推荐)可以将父组件中的数据包装成对象，然后在子组件中修改对象的属性(因为对象是引用类型，指向同一个内存空间，只改其属性不会影响对象)**
         
 [单向数据流](https://github.com/wangwren/Vue-learning/blob/master/vue04/06.html)
+
+### 非父子组件间的通信
+非父子组件间的通信，可以通过一个空的Vue实例作为中央事件总线(事件中心)，用它来触发事件和监听事件。
+```javascript
+var Event = new Vue(); //创建一个空的Vue实例
+
+Event.$emit(事件名,数据); //触发事件
+
+Event.$on(事件名,data => {}); //监听事件
+```
+
+[非父子组件间的通信](https://github.com/wangwren/Vue-learning/blob/master/vue04/07.html)
+
+## slot内容分发
+- 本意：位置、槽
+- 作用：用来获取组件中的原内容，即标签体中的内容。
+- [slot内容分发](https://github.com/wangwren/Vue-learning/blob/master/vue04/08.html)
