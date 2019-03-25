@@ -4,3 +4,4 @@
 ## [使用axios/vue-resource发送HTTP请求](https://github.com/wangwren/Vue-learning/tree/master/vue02)
 ## [Vue生命周期及实例的属性和方法，自定义指令与过渡](https://github.com/wangwren/Vue-learning/blob/master/vue03)
 ## [组件及组件间的通信](https://github.com/wangwren/Vue-learning/blob/master/vue04)
+## [vue-router、vue-cli和单文件组件](https://github.com/wangwren/Vue-learning/blob/master/vue05)
