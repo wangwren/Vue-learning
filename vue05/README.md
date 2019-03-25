@@ -70,7 +70,7 @@ webpack-demo
     |-webpack.config.js     webpack配置文件  
     |-.babelrc  Babel配置文件  
     
-![1552717843049](../../image/6.png)
+![1552717843049](../image/6.png)
 
 #### 2.编写App.vue
 ```html
